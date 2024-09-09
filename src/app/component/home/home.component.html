@@ -1,0 +1,46 @@
+<section class="m-2">
+    <h2>populer categories</h2>
+    <owl-carousel-o [options]="customOptionsCat">
+
+        @for (categoraya of categoryList; track categoraya._id) {
+        <ng-template carouselSlide>
+            <img [src]="categoraya.image" height="200px" [alt]="categoraya.name" class="w-100">
+            <h3 class="h6  m-2">{{categoraya.name}}</h3>
+        </ng-template>
+        }
+    </owl-carousel-o>
+</section>
+
+
+<div class="containe">
+    <input [(ngModel)]="text" type="search" class="form-control mx-auto my-3 w-50">
+    <div class="row ">
+
+        @for (product of ProductList.slice(0,12) |search:text; track product._id) {
+        <div class="col-md-2 product  g-2">
+            <div class="border custom-div p-2">
+                <div [routerLink]="['/details',product._id]">
+                    <img [src]="product.imageCover" [alt]="product.title" class="w-100">
+                    <h3 class="greeny small">{{product.category.name}}</h3>
+                    <h4 class="h6">{{product.title.split(" ",2).join("")}}</h4>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <span>{{product.price}} EG</span>
+                        <div>
+                            @for (item of [1,2,3,4,5].slice(0,product.ratingsAverage); track $index) {
+                            <span> <i class="fas fa-star" style="color: yellow;"></i> </span>
+                            }
+                            @if(product.ratingsAverage%1!==0){
+                            <i class="fas fa-star-half-alt" style="color: yellow;"></i>
+
+                            }
+                            <span class="text-muted">{{product.ratingsAverage}}</span>
+                        </div>
+                    </div>
+                </div>
+                <button class="btn greeny w-100 btn-main" (click)="addToCard(product._id)">Add to card</button>
+            </div>
+        </div>
+        }
+
+    </div>
+</div>

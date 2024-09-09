@@ -1,0 +1,42 @@
+<section>
+    <h2> Shop Cart </h2>
+    @if(cartDetails.products.length > 0){
+    <button class="btn btn-danger" (click)="clearCart()"> <i class="fa fa-trash"></i> clear cart</button>
+    }
+
+    <p>Total Cart Price: {{cartDetails.totalCartPrice| currency: "GBP"}}</p>
+
+    @for (item of cartDetails.products; track item.product.id) {
+    <div class="row">
+        <div class="col-md-1">
+            <div>
+                <img [src]="item.product.imageCover" alt="product image" class="img-thumbnail w-100" />
+            </div>
+        </div>
+        <div class="col-md-11 d-flex align-items-center justify-content-between">
+            <div>
+                <h3>
+                    {{item.product.title}}
+                </h3>
+                <p>price: {{item.price}}</p>
+                <span class="text-danger" (click)="removeItem(item)">
+                    <i class="fa fa-trash"></i>
+                </span>
+            </div>
+            <div>
+                <span (click)="decreaseCount(item)">
+                    <i class="fa fa-minus-circle"></i>
+                </span>
+                <span class="mx-2">{{item.count}}</span>
+                <span (click)="increaseCount(item)">
+                    <i class="fa fa-plus-circle"></i>
+                </span>
+            </div>
+        </div>
+    </div>
+    }
+
+    @if(cartDetails.products.length > 0){
+        <button class="btn btn-primary mt-3" [routerLink]="['/orders',cartDetails._id]" >order</button>
+        }
+</section>

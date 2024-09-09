@@ -1,0 +1,70 @@
+<div class="container py-4">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <form [formGroup]="registerForm" (ngSubmit)="register()">
+                <!-- حقل الاسم -->
+                <div class="form-group mb-3">
+                    <label for="name">Name</label>
+                    <input formControlName="name" type="text" class="form-control" id="name" placeholder="Enter your name">
+                    @if (registerForm.get('name')?.errors&&registerForm.get("name")?.touched) {
+                        <div class="alert alert-danger w-50">
+                            @if (registerForm.get('name')?.getError("required")) {
+                                <p class="m-0">Name is required </p>
+                            }@else if (registerForm.get('name')?.getError("minlength")) {
+                                <p class="m-0">you shoud write at lest 3 charecter </p>
+                            }@else if (registerForm.get('name')?.getError("maxlength")) {
+                                <p class="m-0">you shoud write 20 charecter max </p>
+                            }
+                            
+                        </div>
+                    }
+                </div>
+
+                <!-- حقل البريد الإلكتروني -->
+                <div class="form-group mb-3">
+                    <label for="email">Email address</label>
+                    <input formControlName="email" type="email" class="form-control" id="email" placeholder="Enter your email">
+                </div>
+
+                <!-- حقل كلمة المرور -->
+                <div class="form-group mb-3">
+                    <label for="password">Password</label>
+                    <input formControlName="password" type="password" class="form-control" id="password" placeholder="Enter your password">
+                </div>
+
+                <!-- حقل تأكيد كلمة المرور -->
+                <div class="form-group mb-3">
+                    <label for="rePassword">Confirm Password</label>
+                    <input formControlName="rePassword" type="password" class="form-control" id="rePassword" placeholder="Confirm your password">
+                    @if (registerForm.getError("misMatch")&&registerForm.get("rePassword")?.touched) {  
+                        <div class="alert alert-danger w-50">
+                            <p class="m-0">password and confirm password should be the same</p>
+                        </div>
+                    }
+                </div>
+
+                <!-- حقل رقم الهاتف -->
+                <div class="form-group mb-3">
+                    <label for="phone">Phone</label>
+                    <input formControlName="phone" type="text" class="form-control" id="phone" placeholder="Enter your phone number">
+
+                </div>
+
+                <!-- زر التسجيل -->
+                <div class="text-end">
+                    <button [disabled]="registerForm.invalid ||isLoading" type="submit" class="btn btn-success">Register
+                        @if(isLoading) {
+                            <span class="spinner-border spinner-border-sm"></span>
+                        }
+                    </button>
+                </div>
+                @if (msError) {
+                    <p class="alert alert-danger mt-3">{{msError}}</p>
+                }
+                @if (msSuccess) {
+                    <p class="alert alert-primary mt-3">success</p>
+                }
+            </form>
+        </div>
+    </div>
+</div>

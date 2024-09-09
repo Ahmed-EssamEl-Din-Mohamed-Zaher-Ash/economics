@@ -1,0 +1,44 @@
+footer h3 {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+footer p {
+    font-size: 1rem;
+    color: #6c757d;
+}
+
+footer img {
+    width: 50px;
+    height: auto;
+}
+
+footer hr {
+    margin: 20px 0;
+}
+.product{
+font-family: 'Courier New', Courier, monospace;
+}
+.custom-div {
+    overflow: hidden; /* Hide overflow content */
+    padding: 20px; /* Optional padding */
+    transition: box-shadow 0.3s ease; /* Smooth transition for shadow effect */
+
+}
+
+.custom-div .btn-main{
+    background-color: green;
+    color: white;
+    transform: translateY(120%);
+    transition: all 1s;
+}
+.product:hover .btn-main{
+    transform: translateY(0);
+}
+/* Hover effect */
+.custom-div:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); /* Light shadow on hover */
+}
+.greeny{
+    color:rgb(43, 174, 80);
+}
